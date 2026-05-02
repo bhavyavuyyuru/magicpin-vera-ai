@@ -224,62 +224,92 @@ def compose(category, merchant, trigger, customer=None):
 
 @app.route('/v1/context', methods=['POST'])
 def receive_context():
-    data = request.json
-    scope = data['scope']
-    context_id = data['context_id']
-    version = data['version']
-    payload = data['payload']
-    
-    if scope in contexts and (context_id not in contexts[scope] or contexts[scope][context_id].get('version', 0) < version):
-        contexts[scope][context_id] = {**payload, 'version': version}
-        return jsonify({'accepted': True, 'ack_id': f'ack_{context_id}', 'stored_at': datetime.utcnow().isoformat()})
-    return jsonify({'accepted': False, 'reason': 'stale_version'}), 409
+    try:
+        data = request.json
+        if not data:
+            return jsonify({'error': 'No JSON data provided'}), 400
+        
+        scope = data.get('scope')
+        context_id = data.get('context_id')
+        version = data.get('version')
+        payload = data.get('payload')
+        
+        if not all([scope, context_id, version is not None, payload]):
+            return jsonify({'error': 'Missing required fields: scope, context_id, version, payload'}), 400
+        
+        if scope not in contexts:
+            return jsonify({'error': f'Invalid scope: {scope}'}), 400
+        
+        if scope in contexts and (context_id not in contexts[scope] or contexts[scope][context_id].get('version', 0) < version):
+            contexts[scope][context_id] = {**payload, 'version': version}
+            return jsonify({'accepted': True, 'ack_id': f'ack_{context_id}', 'stored_at': datetime.utcnow().isoformat()})
+        return jsonify({'accepted': False, 'reason': 'stale_version'}), 409
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
 
 @app.route('/v1/tick', methods=['POST'])
 def tick():
-    data = request.json
-    now = data['now']
-    available_triggers = data['available_triggers']
-    
-    actions = []
-    for trig_id in available_triggers[:1]:  # Send one message per tick
-        if trig_id in contexts['trigger']:
-            trigger = contexts['trigger'][trig_id]
-            merchant_id = trigger.get('merchant_id')
-            customer_id = trigger.get('customer_id')
-            if merchant_id in contexts['merchant']:
-                merchant = contexts['merchant'][merchant_id]
-                category = contexts['category'].get(merchant['category_slug'], {})
-                customer = contexts['customer'].get(customer_id) if customer_id else None
-                result = compose(category, merchant, trigger, customer)
-                actions.append({
-                    'conversation_id': f'conv_{trig_id}',
-                    'merchant_id': merchant_id,
-                    'customer_id': customer_id,
-                    'send_as': result['send_as'],
-                    'trigger_id': trig_id,
-                    'template_name': f'vera_{trigger["kind"]}',
-                    'template_params': [],
-                    'body': result['body'],
-                    'cta': result['cta'],
-                    'suppression_key': result['suppression_key'],
-                    'rationale': result['rationale']
-                })
-    return jsonify({'actions': actions})
+    try:
+        data = request.json
+        if not data:
+            return jsonify({'error': 'No JSON data provided'}), 400
+        
+        now = data.get('now')
+        available_triggers = data.get('available_triggers', [])
+        
+        if not now:
+            return jsonify({'error': 'Missing required field: now'}), 400
+        
+        actions = []
+        for trig_id in available_triggers[:1]:  # Send one message per tick
+            if trig_id in contexts['trigger']:
+                trigger = contexts['trigger'][trig_id]
+                merchant_id = trigger.get('merchant_id')
+                customer_id = trigger.get('customer_id')
+                if merchant_id in contexts['merchant']:
+                    merchant = contexts['merchant'][merchant_id]
+                    category = contexts['category'].get(merchant['category_slug'], {})
+                    customer = contexts['customer'].get(customer_id) if customer_id else None
+                    result = compose(category, merchant, trigger, customer)
+                    actions.append({
+                        'conversation_id': f'conv_{trig_id}',
+                        'merchant_id': merchant_id,
+                        'customer_id': customer_id,
+                        'send_as': result['send_as'],
+                        'trigger_id': trig_id,
+                        'template_name': f'vera_{trigger["kind"]}',
+                        'template_params': [],
+                        'body': result['body'],
+                        'cta': result['cta'],
+                        'suppression_key': result['suppression_key'],
+                        'rationale': result['rationale']
+                    })
+        return jsonify({'actions': actions})
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
 
 @app.route('/v1/reply', methods=['POST'])
 def reply():
-    data = request.json
-    conv_id = data['conversation_id']
-    merchant_msg = data['message']
-    
-    # Simple response
-    return jsonify({
-        'action': 'send',
-        'body': f"Thanks for your message: {merchant_msg}",
-        'cta': 'open_ended',
-        'rationale': 'Acknowledging merchant reply'
-    })
+    try:
+        data = request.json
+        if not data:
+            return jsonify({'error': 'No JSON data provided'}), 400
+        
+        conv_id = data.get('conversation_id')
+        merchant_msg = data.get('message')
+        
+        if not conv_id or not merchant_msg:
+            return jsonify({'error': 'Missing required fields: conversation_id, message'}), 400
+        
+        # Simple response
+        return jsonify({
+            'action': 'send',
+            'body': f"Thanks for your message: {merchant_msg}",
+            'cta': 'open_ended',
+            'rationale': 'Acknowledging merchant reply'
+        })
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
 
 @app.route('/v1/healthz', methods=['GET'])
 def healthz():
