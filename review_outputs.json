@@ -1,0 +1,242 @@
+[
+  {
+    "test_id": "T01",
+    "body": "Hi Suresh, saw you're planning a event. I can help coordinate bookings, catering, payments\u2014interested?",
+    "cta": "binary_yes_stop",
+    "send_as": "vera",
+    "suppression_key": "planning:m_006:corp_thali:2026-W17",
+    "rationale": "Proactive value proposition."
+  },
+  {
+    "test_id": "T02",
+    "body": "Hi Padma, saw you're planning a event. I can help coordinate bookings, catering, payments\u2014interested?",
+    "cta": "binary_yes_stop",
+    "send_as": "vera",
+    "suppression_key": "planning:m_008:kids_yoga:2026-W17",
+    "rationale": "Proactive value proposition."
+  },
+  {
+    "test_id": "T03",
+    "body": "Hi Aditya, quick reminder: your appointment is tomorrow at your scheduled time. See you then!",
+    "cta": "binary_yes_stop",
+    "send_as": "merchant_on_behalf",
+    "suppression_key": "appointment_tomorrow:m_019_karim_salon_lucknow:gen_76",
+    "rationale": "Confirmation + personal touch."
+  },
+  {
+    "test_id": "T04",
+    "body": "Hi Riya, quick reminder: your appointment is tomorrow at your scheduled time. See you then!",
+    "cta": "binary_yes_stop",
+    "send_as": "merchant_on_behalf",
+    "suppression_key": "appointment_tomorrow:m_020_renu_salon_lucknow:gen_77",
+    "rationale": "Confirmation + personal touch."
+  },
+  {
+    "test_id": "T05",
+    "body": "\ud83d\udcc8 Your category is in summer. Peer merchants are scaling staffing & offers. Match their 'Premium Service @ \u20b9599' offer?",
+    "cta": "open_ended",
+    "send_as": "vera",
+    "suppression_key": "season:summer:m_009:2026",
+    "rationale": "Competitive benchmark with peer action."
+  },
+  {
+    "test_id": "T06",
+    "body": "Hi Meera, CDE webinar on latest practices in your field. Improves your credentials by 40%?",
+    "cta": "binary_yes_stop",
+    "send_as": "vera",
+    "suppression_key": "cde:dentists:2026-05-02",
+    "rationale": "Professional development with tangible benefit."
+  },
+  {
+    "test_id": "T07",
+    "body": "Hi Mr. Sharma, refill time for your regular medicine. One-click reorder?",
+    "cta": "binary_yes_stop",
+    "send_as": "merchant_on_behalf",
+    "suppression_key": "refill:c_013_grandfather_for_m009:2026-04",
+    "rationale": "Convenience + retention."
+  },
+  {
+    "test_id": "T08",
+    "body": "Hi Vivaan, refill time for your regular medicine. One-click reorder?",
+    "cta": "binary_yes_stop",
+    "send_as": "merchant_on_behalf",
+    "suppression_key": "chronic_refill_due:m_011_dr_sameer_dentist_bangalore:gen_81",
+    "rationale": "Convenience + retention."
+  },
+  {
+    "test_id": "T09",
+    "body": "\u26a0\ufe0f New competitor opened 1.5km away in Lajpat Nagar. Strengthen your GBP with 5 new photos + verification?",
+    "cta": "open_ended",
+    "send_as": "vera",
+    "suppression_key": "competitor:m_001:smile_studio",
+    "rationale": "Urgency + competitive threat + action."
+  },
+  {
+    "test_id": "T10",
+    "body": "\u26a0\ufe0f New competitor opened 1.5km away in Indiranagar. Strengthen your GBP with 5 new photos + verification?",
+    "cta": "open_ended",
+    "send_as": "vera",
+    "suppression_key": "competitor_opened:m_006_southindiancafe_restaurant_bangalore:gen_56",
+    "rationale": "Urgency + competitive threat + action."
+  },
+  {
+    "test_id": "T11",
+    "body": "Hi Lakshmi, how's business this week? Any wins to celebrate or challenges to solve?",
+    "cta": "open_ended",
+    "send_as": "vera",
+    "suppression_key": "curious_ask:m_003:2026-W17",
+    "rationale": "Regular pulse check."
+  },
+  {
+    "test_id": "T12",
+    "body": "Hi Suresh, how's business this week? Any wins to celebrate or challenges to solve?",
+    "cta": "open_ended",
+    "send_as": "vera",
+    "suppression_key": "curious_ask_due:m_006_southindiancafe_restaurant_bangalore:gen_96",
+    "rationale": "Regular pulse check."
+  },
+  {
+    "test_id": "T13",
+    "body": "Hi Rashmi, it's been 6 months. What went wrong? We'd love to fix it.",
+    "cta": "binary_yes_stop",
+    "send_as": "merchant_on_behalf",
+    "suppression_key": "winback:c_010_rashmi_for_m007",
+    "rationale": "Feedback loop for churn prevention."
+  },
+  {
+    "test_id": "T14",
+    "body": "Hi Reyansh, we miss you! Exclusive offer: 20% off your next visit. Come back?",
+    "cta": "binary_yes_stop",
+    "send_as": "merchant_on_behalf",
+    "suppression_key": "customer_lapsed_soft:m_014_dr_asha_dentist_chandigarh:gen_71",
+    "rationale": "Incentivized win-back."
+  },
+  {
+    "test_id": "T15",
+    "body": "Hi Reyansh, we miss you! Exclusive offer: 20% off your next visit. Come back?",
+    "cta": "binary_yes_stop",
+    "send_as": "merchant_on_behalf",
+    "suppression_key": "customer_lapsed_soft:m_049_komal_pharmacie_lucknow:gen_72",
+    "rationale": "Incentivized win-back."
+  },
+  {
+    "test_id": "T16",
+    "body": "Hi Anjali, haven't heard from you in 14 days. Your GBP needs 3 new posts\u2014shall I draft them?",
+    "cta": "open_ended",
+    "send_as": "vera",
+    "suppression_key": "dormant:m_004:30d",
+    "rationale": "Re-engagement with concrete deliverable."
+  },
+  {
+    "test_id": "T17",
+    "body": "Hi Anand, haven't heard from you in 14 days. Your GBP needs 3 new posts\u2014shall I draft them?",
+    "cta": "open_ended",
+    "send_as": "vera",
+    "suppression_key": "dormant_with_vera:m_029_anand_restaurant_chandigarh:gen_46",
+    "rationale": "Re-engagement with concrete deliverable."
+  },
+  {
+    "test_id": "T18",
+    "body": "\ud83d\udca1 Diwali is 4 weeks away. Customers are booking now. Offer 'Premium salons @ \u20b91999'?",
+    "cta": "open_ended",
+    "send_as": "vera",
+    "suppression_key": "festival:diwali:2026:m_003",
+    "rationale": "Timely seasonal opportunity with concrete offer."
+  },
+  {
+    "test_id": "T19",
+    "body": "\ud83d\udca1 Diwali is 4 weeks away. Customers are booking now. Offer 'Premium gyms @ \u20b91999'?",
+    "cta": "open_ended",
+    "send_as": "vera",
+    "suppression_key": "festival_upcoming:m_037_pooja_gym_bangalore:gen_61",
+    "rationale": "Timely seasonal opportunity with concrete offer."
+  },
+  {
+    "test_id": "T20",
+    "body": "Hi Vikas, gbp unverified. Interested?",
+    "cta": "open_ended",
+    "send_as": "vera",
+    "suppression_key": "unverified:m_010",
+    "rationale": "Trigger: gbp_unverified"
+  },
+  {
+    "test_id": "T21",
+    "body": "Hi Suresh, ipl match today. Interested?",
+    "cta": "open_ended",
+    "send_as": "vera",
+    "suppression_key": "ipl:m_005:2026-04-26",
+    "rationale": "Trigger: ipl_match_today"
+  },
+  {
+    "test_id": "T22",
+    "body": "\ud83c\udfc6 Congratulations! You hit 100 reviews at 4.5/5 stars. Highlight this: 'Top-Rated in Indiranagar'?",
+    "cta": "open_ended",
+    "send_as": "vera",
+    "suppression_key": "milestone:m_006:reviews_150",
+    "rationale": "Celebration + social proof positioning."
+  },
+  {
+    "test_id": "T23",
+    "body": "\ud83c\udfc6 Congratulations! You hit 100 reviews at 4.5/5 stars. Highlight this: 'Top-Rated in Aundh'?",
+    "cta": "open_ended",
+    "send_as": "vera",
+    "suppression_key": "milestone_reached:m_032_mukesh_restaurant_pune:gen_41",
+    "rationale": "Celebration + social proof positioning."
+  },
+  {
+    "test_id": "T24",
+    "body": "Alert: Your calls dropped 50% (from 12 last week). Profile stale? Let's refresh it?",
+    "cta": "binary_yes_stop",
+    "send_as": "vera",
+    "suppression_key": "perf_dip:m_002_bharat_dentist_mumbai:calls:2026-W17",
+    "rationale": "Loss aversion + action to reverse trend."
+  },
+  {
+    "test_id": "T25",
+    "body": "Alert: Your calls dropped 30% (from 12 last week). Profile stale? Let's refresh it?",
+    "cta": "binary_yes_stop",
+    "send_as": "vera",
+    "suppression_key": "perf_dip:m_023_sushma_salon_pune:gen_31",
+    "rationale": "Loss aversion + action to reverse trend."
+  },
+  {
+    "test_id": "T26",
+    "body": "\ud83c\udfaf Breakthrough week! Your calls jumped 15% to 880. Let's sustain this momentum\u2014what changed?",
+    "cta": "open_ended",
+    "send_as": "vera",
+    "suppression_key": "perf_spike:m_008:calls:2026-W17",
+    "rationale": "Social proof + curiosity to compound gains."
+  },
+  {
+    "test_id": "T27",
+    "body": "\ud83c\udfaf Breakthrough week! Your views jumped 15% to 720. Let's sustain this momentum\u2014what changed?",
+    "cta": "open_ended",
+    "send_as": "vera",
+    "suppression_key": "perf_spike:m_010_sunrisepharm_pharmacy_lucknow:gen_36",
+    "rationale": "Social proof + curiosity to compound gains."
+  },
+  {
+    "test_id": "T28",
+    "body": "Hi Priya, your 6 Month Cleaning is due. Slots available Wed & Thu evening?",
+    "cta": "binary_yes_stop",
+    "send_as": "merchant_on_behalf",
+    "suppression_key": "recall:c_001_priya_for_m001:6mo",
+    "rationale": "Personalized appointment prompt with options."
+  },
+  {
+    "test_id": "T29",
+    "body": "Hi Diya, your Services is due. Slots available Wed & Thu evening?",
+    "cta": "binary_yes_stop",
+    "send_as": "merchant_on_behalf",
+    "suppression_key": "recall_due:m_008_zenyoga_gym_chennai:gen_66",
+    "rationale": "Personalized appointment prompt with options."
+  },
+  {
+    "test_id": "T30",
+    "body": "Hi Meera, regulation change. Interested?",
+    "cta": "open_ended",
+    "send_as": "vera",
+    "suppression_key": "compliance:dci_radiograph:2026",
+    "rationale": "Trigger: regulation_change"
+  }
+]
