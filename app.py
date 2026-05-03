@@ -44,7 +44,7 @@ def generate_message(trigger, merchant, customer=None):
         return f"Hi {name}, reminder: your appointment is tomorrow. Slots are tight—want me to reschedule if needed?"
 
     if kind == "perf_dip":
-        return f"Hi {owner}, your calls dropped this week. Adding fresh photos + a ₹299 offer can recover traffic fast. Want me to fix it now?"
+        return f"Hi {owner}, your calls dropped this week. Adding fresh photos + a ₹299 offer can recover traffic fast. Want me to fix this for you in 2 minutes?"
 
     if kind == "perf_spike":
         return f"🎯 Great week! Your views are up. Perfect time to launch a premium offer and convert this demand—should I set it up?"
