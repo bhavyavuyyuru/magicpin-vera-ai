@@ -41,43 +41,43 @@ def generate_message(trigger, merchant, customer=None):
     name = customer.get("identity", {}).get("name") if customer else None
 
     if kind == "appointment_tomorrow" and name:
-        return f"Hi {name}, reminder: your appointment is tomorrow. Need to reschedule?"
+        return f"Hi {name}, reminder: your appointment is tomorrow. Slots are tight—want me to reschedule if needed?"
 
     if kind == "perf_dip":
-        return f"Hi {owner}, your calls dropped this week. Updating your profile + adding a ₹299 offer can recover traffic. Want me to fix it?"
+        return f"Hi {owner}, your calls dropped this week. Adding fresh photos + a ₹299 offer can recover traffic fast. Want me to fix it now?"
 
     if kind == "perf_spike":
-        return f"🎯 Great week! Your views are up. Perfect time to launch an offer—want me to set it up?"
+        return f"🎯 Great week! Your views are up. Perfect time to launch a premium offer and convert this demand—should I set it up?"
 
     if kind == "competitor_opened":
-        return f"⚠️ A new competitor opened in {locality}. Add fresh photos + verify your profile to stay ahead. Want me to do it?"
+        return f"⚠️ A new competitor opened in {locality}. Updating your profile + adding 5 fresh photos can protect your ranking. Want me to do it now?"
 
     if kind == "customer_lapsed_soft" and name:
-        return f"Hi {name}, we miss you! A 20% comeback offer can bring you back. Want me to book your visit?"
+        return f"Hi {name}, we miss you! Here’s 20% off your next visit. Want me to book a slot for you?"
 
     if kind == "customer_lapsed_hard" and name:
-        return f"Hi {name}, it’s been a while. Anything we can improve? We’d love to have you back."
+        return f"Hi {name}, it’s been a while. What didn’t work last time? We’d love to fix it and have you back."
 
     if kind == "chronic_refill_due" and name:
-        return f"Hi {name}, your regular medicine is due. Reordering now avoids hassle—want me to place it?"
+        return f"Hi {name}, your regular medicine is due. Reordering now avoids last-minute hassle—want me to place it?"
 
     if kind == "recall_due" and name:
-        return f"Hi {name}, your service is due. Slots available this week—shall I book one?"
+        return f"Hi {name}, your service is due. Slots available this week—shall I book one for you?"
 
     if kind == "festival_upcoming":
         fest = payload.get("festival", "Festival")
-        return f"💡 {fest} bookings are rising. Launch a ₹999 festive package—want me to set it up?"
+        return f"💡 {fest} bookings are already picking up. Launching a ₹999 festive package now can boost sales—want me to set it up?"
 
     if kind == "category_seasonal":
-        return f"📈 Your category is entering peak season. Top merchants are pushing premium offers. Want to match them?"
+        return f"📈 Your category is entering peak season. Top merchants are pushing ₹599 premium packages. Want to match them?"
 
     if kind == "milestone_reached":
-        return f"🏆 You hit a milestone! Promote this as 'Top-rated in {locality}' to boost conversions—want me to highlight it?"
+        return f"🏆 You hit a major milestone! Promoting 'Top-rated in {locality}' can increase conversions. Want me to highlight it?"
 
     if kind == "curious_ask":
-        return f"Hi {owner}, what's limiting growth right now—visibility, demand, or staffing?"
+        return f"Hi {owner}, quick check—what’s limiting growth right now: visibility, demand, or staffing? I can help fix it."
 
-    return f"Hi {owner}, I spotted a growth opportunity for your business. Want help improving it?"
+    return f"Hi {owner}, I noticed a gap in your profile that’s affecting visibility. Want me to fix it quickly?"
 
 
 # Load dataset (safe)
@@ -147,8 +147,10 @@ def receive_context():
     if not all([scope, context_id, payload]):
         return jsonify({'error': 'Missing fields'}), 400
 
-    contexts[scope][context_id] = payload
-
+    contexts[scope][context_id] = {
+    **payload,
+    "id": context_id
+}
     return jsonify({'accepted': True})
 
 
@@ -164,7 +166,7 @@ def tick():
         return jsonify({
             "actions": [{
                 "conversation_id": "default",
-                "body": "Hi! Want help improving your business performance?",
+                "body": "Hi! I noticed an opportunity to improve your business visibility and bookings. Want me to help fix it?",
                 "cta": "open_ended"
             }]
         })
@@ -205,13 +207,13 @@ def reply():
     if any(x in msg for x in ["book", "appointment"]):
         return jsonify({
             "action": "send",
-            "body": "Got it 👍 Checking availability and confirming shortly."
+            "body": "Got it 👍 I’m checking available slots and will confirm your booking shortly."
         })
 
     if any(x in msg for x in ["yes", "ok", "sure"]):
         return jsonify({
             "action": "send",
-            "body": "Perfect 👍 I’ll take care of this and update you shortly."
+            "body": "Perfect 👍 I’ll handle this for you and share an update shortly."
         })
 
     if any(x in msg for x in ["no", "not now"]):
@@ -220,6 +222,11 @@ def reply():
             "action": "end",
             "body": "No worries 🙂 Reach out anytime!"
         })
+    if "price" in msg or "cost" in msg:
+        return jsonify({
+        "action": "send",
+        "body": "I can help you find the best pricing options 👍 What service are you looking for?"
+    })
 
     return jsonify({
         "action": "send",
